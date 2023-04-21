@@ -195,7 +195,7 @@ const RegisterLocation = ({ locationText, locationCircle }) => {
                 )}
               </div>
             </div>
-            <div className="input-location mb-md-0 mb-5">
+            <div className="input-location">
               <div className="input-box">
                 <label className="input-label">شهر</label>
                 <Location size="20" />
@@ -246,7 +246,7 @@ const RegisterLocation = ({ locationText, locationCircle }) => {
               )}
             </div>
           </div>
-          <div className="map-input-holder mt-5">
+          <div className="d-flex mt-5">
             <div className="input-box w-50 ms-3 my-0">
               <label className="input-label">طول جغرافیایی</label>
               <Location size="20" />

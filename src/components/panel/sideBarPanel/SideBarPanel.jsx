@@ -50,7 +50,7 @@ const SideBarPanel = ({sideMenu,setSideMenu}) => {
               </NavLink>
             </li>
           </ul>
-          <NavLink className="exit-btn">
+          <NavLink className="exit-btn" to={"/login"}>
               <Logout size="20" className="ms-3"/>
               خروج
           </NavLink>
@@ -87,7 +87,7 @@ const SideBarPanel = ({sideMenu,setSideMenu}) => {
               </NavLink>
             </li>
           </ul>
-          <NavLink className="exit-btn">
+          <NavLink to={"/login"} className="exit-btn">
               <Logout size="20" className="ms-3"/>
               خروج
           </NavLink>

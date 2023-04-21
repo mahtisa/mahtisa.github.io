@@ -15,6 +15,7 @@ import CoinsSlide from "../../components/panel/coinSlide/CoinsSlide";
 import { LineChart } from "recharts";
 import LineChartCompare from "../../components/panel/LineChartCompare";
 import PipeChart from "../../components/panel/PipeChart";
+import ReactLoading from "react-loading";
 import SideBarPanel from "../../components/panel/sideBarPanel/SideBarPanel";
 import axios from "axios";
 import profile from "../../images/profile.png";
@@ -61,9 +62,9 @@ const Panel = () => {
   const [walletInfo, setWalletInfo] = useState([]);
   const [sideMenu, setSideMenu] = useState(false);
   const auth = useAuthContext();
+  const { state } = useLocation();
+
   useEffect(() => {
-    const userWalletInfo = JSON.parse(localStorage.getItem("MOCKAPI"));
-    setWalletInfo(userWalletInfo);
     const swiperEl = document.querySelector("swiper-container");
     const swiperParams = {
       slidesPerView: 3,
@@ -75,7 +76,7 @@ const Panel = () => {
         400: {
           slidesPerView: 1.2,
         },
-         500: {
+        500: {
           slidesPerView: 1.7,
         },
         700: {
@@ -113,46 +114,50 @@ const Panel = () => {
       .catch((error) => {
         console.log(error);
       });
-    axios
-      .get("https://6440c1e8fadc69b8e071ded2.mockapi.io/dornika/wallet")
-      .then((response) => {
-        if (auth && auth.result.id) {
-          const userWallet = getUserWalletInfo(response.data, auth.result.id);
-          localStorage.setItem("MOCKAPI", JSON.stringify(userWallet));
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-      const fetchTrendingCoins = async () => {
-        try {
-          const result = await axios.get('https://api.coingecko.com/api/v3/search/trending');
-          const coinIds = result.data.coins.map((coin) => coin.item.id);
-          const coinDetails = await Promise.all(
-            coinIds.map((coinId) =>
-              axios.get(`https://api.coingecko.com/api/v3/coins/${coinId}`)
-            )
-          );
-          const sortedCoins = coinDetails
-            .map((response) => response.data)
-            .sort((coin1, coin2) => {
-              return coin2.market_data.circulating_supply - coin1.market_data.circulating_supply;
-            });
-          setTrendingCoins(sortedCoins);
-        } catch (error) {
-          console.log(error);
-        }
-      };
   
-      fetchTrendingCoins();
+    const userWalletInfo = JSON.parse(localStorage.getItem("MOCKAPI"));
+    setWalletInfo(userWalletInfo.wallet_coins);
+    console.log("userWALLLETinfo:",userWalletInfo)
+    const fetchTrendingCoins = async () => {
+      try {
+        const result = await axios.get(
+          "https://api.coingecko.com/api/v3/search/trending"
+        );
+        const coinIds = result.data.coins.map((coin) => coin.item.id);
+        const coinDetails = await Promise.all(
+          coinIds.map((coinId) =>
+            axios.get(`https://api.coingecko.com/api/v3/coins/${coinId}`)
+          )
+        );
+        const sortedCoins = coinDetails
+          .map((response) => response.data)
+          .sort((coin1, coin2) => {
+            return (
+              coin2.market_data.circulating_supply -
+              coin1.market_data.circulating_supply
+            );
+          });
+        setTrendingCoins(sortedCoins);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchTrendingCoins();
   }, []);
+
+console.log("walletInfo:",walletInfo)
   return (
     <>
       <div className="panel">
         <SideBarPanel sideMenu={sideMenu} setSideMenu={setSideMenu} />
         <div className="main-panel">
           <header className="d-flex justify-content-between w-100 align-items-center header">
-            <HambergerMenu size="24" onClick={()=> setSideMenu(true)} className="side-icon"/>
+            <HambergerMenu
+              size="24"
+              onClick={() => setSideMenu(true)}
+              className="side-icon"
+            />
             <div className="left-header d-flex align-items-center">
               <div className="notification">
                 <Notification size="24" />
@@ -168,6 +173,7 @@ const Panel = () => {
             </div>
             <swiper-container className="mySwiper" init="false">
               {coinsData &&
+                coinsData.length > 0 &&
                 coinsData.map((coin) => {
                   return <CoinsSlide key={coin.id} coin={coin} />;
                 })}
@@ -183,26 +189,28 @@ const Panel = () => {
                       <div className="d-flex w-100 align-items-center">
                         <ul className="assets-list">
                           {walletInfo &&
-                            walletInfo.map((w) => {
-                              return (
-                                <li key={w.id}>
-                                  <div
-                                    className="circle-li"
-                                    style={{ background: w.color }}
-                                  ></div>
-                                  <h3>{w.name}</h3>
-                                  <div className="text-mute">
-                                    {getCoinPercent(walletInfo, w.value)}%
-                                  </div>
-                                </li>
-                              );
-                            })}
+                              walletInfo.map((w) => {
+                                return (
+                                  <li key={w.id}>
+                                    <div
+                                      className="circle-li"
+                                      style={{ background: w.color }}
+                                    ></div>
+                                    <h3>{w.name}</h3>
+                                    <div className="text-mute">
+                                      {getCoinPercent(walletInfo, w.value)}%
+                                    </div>
+                                  </li>
+                                );
+                              })}
                         </ul>
                         <div className="pipe-chart-holder">
-                          <PipeChart
-                            coins={walletInfo}
-                            colors={getCoinsColor(walletInfo)}
-                          />
+                          {walletInfo && coinsData &&(
+                            <PipeChart
+                              coins={walletInfo}
+                              colors={getCoinsColor(walletInfo)}
+                            />
+                          )}
                         </div>
                       </div>
                     </div>
@@ -213,7 +221,7 @@ const Panel = () => {
                     <div>
                       <h2 className="mb-3">ارزش معاملات هفته گذشته</h2>
                       <div className="bar-chart-holder">
-                        <BarChartBlue/>
+                        <BarChartBlue />
                       </div>
                     </div>
                   </div>
@@ -223,7 +231,7 @@ const Panel = () => {
                 <div className="col">
                   <div className="panel-part-box">
                     <div className="line-chart-holder">
-                      <LineChartCompare/>
+                      <LineChartCompare />
                     </div>
                   </div>
                 </div>
@@ -246,12 +254,7 @@ const Panel = () => {
                 <ul>
                   {trendingCoins &&
                     trendingCoins.map((coin) => {
-                      return (
-                        <CoinList
-                          key={coin.id}
-                          coin={coin}
-                        />
-                      );
+                      return <CoinList key={coin.id} coin={coin} />;
                     })}
                 </ul>
               </div>

@@ -139,6 +139,12 @@
 .side-icon{
   cursor: pointer;
 }
+.loadng-box{
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
 @media (max-width: 1200px) {
   .main-panel {
     width: 100%;
