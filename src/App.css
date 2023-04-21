@@ -1,38 +1,165 @@
+ul {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+li{
+  list-style: none;
+}
+button,
+input,
+.Toastify__toast {
+  font-family: "YekanBakhMedium";
+}
+h1 {
+  font-family: "YekanBakhHeavy";
+}
+h2,
+h3,
+h4 {
+  font-family: "YekanBakhBold" !important;
+  margin-bottom: 0!important;
+}
+p {
+  font-family: "YekanBakhLight";
+}
+.Toastify__toast {
+  direction: rtl;
+  text-align: right;
+  font-family: "YekanBakhMedium";
+}
 .App {
-  text-align: center;
+  padding: 32px;
+  direction: rtl;
+  background: #e8f4ff;
+  margin: 0;
+  box-sizing: border-box;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.bg-blue {
+  background: #388aea;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+form {
+  width: 100%;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.input-box {
+  border: 1px solid #d6d6d6;
+  border-radius: 51px;
+  width: 100%;
+  height: 60px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+  position: relative;
+}
+.input-box input,
+.input-box select {
+  border: none;
+  outline: none;
+  padding: 0px 10px;
+  border-right: solid 1px #d6d6d6;
+  margin-right: 15px;
+  width: 100%;
+  font-family: "YekanBakhMedium";
+}
+.input-box select {
+  width: calc(100% - 34px);
+  color: #d6d6d6;
+}
+.input-box input::placeholder {
+  font-size: 16px;
+  line-height: 25px;
+  color: #d6d6d6;
+}
+
+.error::placeholder {
+  color: red !important;
+}
+.error {
+  color: red;
+}
+.input-label {
+  position: absolute;
+  background-color: #fff;
+  font-size: 16px;
+  top: -12px;
+  right: 35px;
+  padding: 0 8px;
+  color: #1e1e1e;
+}
+.btn-blue {
+  border: none;
+  outline: none;
+  background: #388aea;
+  border-radius: 16px;
+  width: 170px;
+  height: 49px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  color: #fff;
+  font-size: 16px;
+}
+.loading {
+  margin-top: -20px;
+}
+.rmdp-input:focus {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+.rmdp-input {
+  border-radius: 0 !important;
+}
+.rmdp-container {
+  width: 100%;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  background-image: linear-gradient(to bottom, #fff 0%, #fff 100%) !important;
+  -webkit-box-shadow: 0 0 0 30px #fff inset !important; /* Set the background color here */
+  box-shadow: 0 0 0 30px #fff inset !important;
+}
+.completed {
+  background-color: #fff !important;
+}
+.btn-mute {
+  background: #cecece !important;
+}
+select .text-danger {
+  color: red !important;
 }
 
-.App-link {
-  color: #61dafb;
+.leaflet-container.leaflet-touch.leaflet-retina.leaflet-fade-anim.leaflet-grab.leaflet-touch-drag.leaflet-touch-zoom {
+  width: 100%;
+  height: calc(100vh - 85px);
+  max-height: 525px;
+  border-radius: 16px;
 }
+path.recharts-curve.recharts-area-curve {
+  stroke-width: 3px !important;
+}
+swiper-container{
+  padding: 0 40px!important;
+}
+.recharts-legend-wrapper{
+  display: none!important;
+}
+.error-box{
+  padding-right: 55px;
+  margin: 10px 0;
+}
+.line-chart-holder .recharts-wrapper ,.bar-chart-holder .recharts-wrapper{
+  width: 100%!important;
+  height: 100%!important;
+  left: -30px;
+}
+ svg.recharts-surface{
+  width: 100%!important;
+  height: 100%!important;
+}
+@media (max-width: 500px) {
+  .App{
+    padding: 20px
+  }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

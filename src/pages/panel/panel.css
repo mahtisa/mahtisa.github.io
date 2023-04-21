@@ -1,0 +1,149 @@
+.panel {
+  display: flex;
+  justify-content: end;
+}
+.main-panel {
+  width: calc(100% - 275px);
+  margin-right: 20px;
+}
+.header {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+}
+.header img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 16px;
+}
+.notification {
+  position: relative;
+}
+.circle-notification {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #29c57a;
+  border-radius: 50%;
+  top: 30%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+}
+.coins-slider {
+  position: relative;
+  margin: 20px 0px;
+}
+.slider-btn-holder {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 99;
+  top: 45%;
+  padding: 0 10px;
+}
+.loading {
+  margin: -20 auto 0 auto;
+  text-align: center;
+}
+.panel-part-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px 14px;
+}
+.panel-part-box .trend-box-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.trend-box-head .select-holder {
+  border: 1px solid #bfbfbf;
+  border-radius: 8px;
+  padding: 5px;
+}
+.select-holder select{
+    color: #bfbfbf;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+.list-header{
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+.trend ul{
+    position: relative;
+}
+.trend ul:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255, 1) 90%);
+    width: 100%;
+    height: 100px;
+}
+.panel-part-box h2,.trend-box-head h2 {
+  font-size: 16px;
+}
+.circle-li{
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+.assets-list{
+  width: 40%;
+}
+.assets-list li{
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
+.assets-list li h3{
+  font-size: 16px;
+  margin: 0 12px;
+}
+.assets-list li .text-mute{
+  font-size: 13px;
+  color: #AEAEAE;
+}
+.pipe-chart-holder{
+  width: 60%;
+  height: 170px;
+}
+.bar-chart-holder{
+  width: 100%;
+  position: relative;
+}
+.bar-chart-holder::after{
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255, 1) 90%);
+  width: 100%;
+  height: 100px;
+}
+.line-chart-holder{
+  width: 100%;
+  height: 300px;
+}
+.side-icon{
+  cursor: pointer;
+}
+@media (max-width: 1200px) {
+  .main-panel {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+
